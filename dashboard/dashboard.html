@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dr.Friend | Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+</head>
+
+<body>
+    <header class="navbar">
+        <!-- Navbar with logo and app name only -->
+        <div class="navbar">
+            <div class="logo">
+                <img src="../logo/logo.png" alt="Dr. Friend Logo" id="appLogo">
+                <span id="appName">Dr. Friend</span>
+            </div>
+        </div>
+
+        <div class="nav-controls">
+            <button id="themeToggle" class="theme-btn" title="Toggle theme">🌗</button>
+
+            <!-- Profile icon (round) -->
+            <div id="profileMenuWrap" class="profile-wrap">
+                <img id="profileIcon" class="profile-icon" src="../logo/Profile.png" alt="Profile"
+                    title="Open profile" />
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Small cards with left border (compact) -->
+        <div class="cards-row">
+            <div class="small-card" data-cat="bill">
+                <div class="card-line"></div>
+                <div class="card-body">
+                    <h4>Bills</h4>
+                    <p id="billCount">0 files</p>
+                    <button class="card-view" data-open="bill">View</button>
+                </div>
+            </div>
+
+            <div class="small-card" data-cat="report">
+                <div class="card-line"></div>
+                <div class="card-body">
+                    <h4>Reports</h4>
+                    <p id="reportCount">0 files</p>
+                    <button class="card-view" data-open="report">View</button>
+                </div>
+            </div>
+
+            <div class="small-card" data-cat="prescription">
+                <div class="card-line"></div>
+                <div class="card-body">
+                    <h4>Prescriptions</h4>
+                    <p id="prescriptionCount">0 files</p>
+                    <button class="card-view" data-open="prescription">View</button>
+                </div>
+            </div>
+
+            <div class="small-card" data-cat="other">
+                <div class="card-line"></div>
+                <div class="card-body">
+                    <h4>Documents</h4>
+                    <p id="otherCount">0 files</p>
+                    <button class="card-view" data-open="other">View</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- (Your original upload / other UI remains below) -->
+
+        <!-- Popup 1: Choose record type (your original) -->
+        <div id="typePopup" class="popup hidden">
+            <div class="popup-inner">
+                <button class="back-btn" data-close="typePopup">🔙</button>
+                <h2>Select Record Type</h2>
+                <div class="type-list">
+                    <button class="type-option" data-type="bill">Bill</button>
+                    <button class="type-option" data-type="prescription">Prescription</button>
+                    <button class="type-option" data-type="report">Report</button>
+                    <button class="type-option" data-type="other">Other</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup 2: Upload file (your original) -->
+        <div id="uploadPopup" class="popup hidden">
+            <div class="popup-inner">
+                <button class="back-btn" data-close="uploadPopup">🔙</button>
+                <h2 id="uploadTitle">Upload</h2>
+                <label class="label">Choose file</label>
+                <input id="fileInput" type="file" />
+                <label class="label">Optional name for file</label>
+                <input id="fileNameInput" type="text" placeholder="Document name (optional)" />
+                <div class="popup-actions">
+                    <button id="uploadSave" class="action-btn">Upload</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup 3: View category list (we will use this) -->
+        <div id="viewPopup" class="popup hidden">
+            <div class="popup-inner large">
+                <button class="back-btn" data-close="viewPopup">🔙</button>
+                <h2 id="viewTitle">Records</h2>
+                <div id="viewList" class="view-list"></div>
+            </div>
+        </div>
+
+        <!-- Trash Popup -->
+        <div id="trashPopup" class="popup hidden">
+            <div class="popup-inner large">
+                <button class="back-btn" data-close="trashPopup">🔙</button>
+                <h2 id="trashTitle">Trash</h2>
+                <div id="trashList" class="view-list"></div>
+            </div>
+        </div>
+
+        <!-- Preview Lightbox (keeps your earlier layout) -->
+        <div id="previewPopup" class="popup hidden">
+            <div class="preview-inner">
+                <button class="back-btn" data-close="previewPopup">✖️</button>
+                <div class="preview-controls">
+                    <button id="prevBtn" class="nav-btn">⏮️</button>
+                    <div id="previewArea" class="preview-area"></div>
+                    <button id="nextBtn" class="nav-btn">⏭️</button>
+                </div>
+                <div class="preview-actions">
+                    <button id="downloadPreview" class="action-btn">Download</button>
+                    <button id="copyLinkBtn" class="action-btn alt">Copy Link</button>
+                    <button id="shareNativeBtn" class="action-btn alt">Share</button>
+                </div>
+                <p class="share-warning" id="shareWarning"></p>
+            </div>
+        </div>
+
+        <!-- Profile Popup (unchanged) -->
+        <div id="profilePopup" class="popup hidden">
+            <div class="popup-inner profile-popup">
+                <button class="back-btn" data-close="profilePopup">🔙</button>
+                <h2>Your Profile</h2>
+
+                <div class="profile-card ui-profile">
+                    <div class="profile-left">
+                        <div class="profile-pic-wrap">
+                            <img id="profileImg" src="../logo/Profile.png" alt="Profile" class="profile-photo" />
+                            <input id="profilePicInput" type="file" accept="image/*" class="hidden" />
+                            <button id="changePicBtn" class="small-btn">Change Photo</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-right">
+                        <label>Name</label>
+                        <input id="profileName" type="text" placeholder="Your name" />
+
+                        <label>Email</label>
+                        <input id="profileEmail" type="email" placeholder="you@example.com" />
+
+                        <label>Phone</label>
+                        <input id="profilePhone" type="text" placeholder="+91 ..." />
+
+                        <div class="profile-actions">
+                            <button id="saveProfileBtn" class="action-btn">Save Profil</button>
+                            <button id="logoutBtn" class="action-btn alt red">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="chatbotBtn" class="floating-chat-btn">🤖</button>
+
+        <div id="chatPopup" class="chat-popup hidden">
+            <div class="chat-popup-inner">
+
+                <div class="chat-header">
+                    <h3>Dr.Friend 🤖</h3>
+                    <button id="closeChat" class="close-chat-btn">✖️</button>
+                </div>
+
+                <div id="chatMessages" class="chat-messages">
+                    <div class="bot-msg">
+                        👋 Hi! I'm here to help you with your medical records.
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Ask something...">
+                    <button id="sendChat" class="send-chat-btn">➤</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- floating + -->
+    <button id="addBtn" class="floating-btn" title="Add / Upload record">➕</button>
+    <!-- floating trash (left) -->
+    <button id="trashBtn" class="floating-btn left" title="Trash">🗑️</button>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

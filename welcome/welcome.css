@@ -1,0 +1,107 @@
+body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ebded4;
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+    }
+
+    /* MAIN CARD */
+    .welcome-box {
+        width: 90%;
+        max-width: 450px;
+        background: #fff7f2;
+        border-radius: 22px;
+        padding: 35px;
+        text-align: center;
+        border: 2px solid rgba(166, 109, 72, 0.3);
+        box-shadow: 0 0 25px rgba(0,0,0,0.15);
+        position: relative;
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    /* DR CARTOON */
+    .doctor-img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        display: block;
+        object-fit: contain;
+        animation: floating 2s ease-in-out infinite;
+    }
+
+    /* WEBAPP NAME */
+    .app-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: #a66d48;
+        margin-top: 12px;
+        animation: slideUp 0.9s ease-out forwards;
+    }
+
+    /* TAGLINE */
+    .tagline {
+        font-size: 16px;
+        opacity: 0.75;
+        color: #4a3328;
+        margin-top: 6px;
+        animation: fadeIn 1.2s ease-in forwards;
+    }
+
+    /* BUTTON */
+    .enter-btn {
+        width: 100%;
+        padding: 15px;
+        margin-top: 25px;
+        background: #a66d48;
+        color: white;
+        border: none;
+        border-radius: 14px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        animation: bounceIn 1.3s ease-out forwards;
+    }
+    .enter-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 14px rgba(166, 109, 72, 0.4);
+    }
+
+    /* FOOTER */
+    .footer {
+        margin-top: 20px;
+        font-size: 14px;
+        opacity: 0.7;
+        color: #4a3328;
+    }
+    .footer span {
+        color: #a66d48;
+        font-weight: 600;
+    }
+
+    /* ANIMATIONS */
+    @keyframes floating {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+        0% { transform: scale(0.6); opacity: 0; }
+        60% { transform: scale(1.05); opacity: 1; }
+        100% { transform: scale(1); }
+    }
